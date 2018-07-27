@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <title>HBooker | Demandes de rendez-vous par Internet (c) Ackwa</title>
+    <meta name="author" content="Ackwa.fr">
+    <meta name="description" content="Logiciel de gestion des demandes de rendez-vous adaptée à votre établissement et à vos patients">
+
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'/>
+    <meta name="viewport" content="width=device-width"/>
+
+    <!-- Fonts and icons -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+
+    <!-- Bootstrap Stylesheet -->
+    <link type="text/css" href="vendors/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link type="text/css" href="vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+
+    <!-- Alpaca Stylesheet for Bootstrap -->
+    <link type="text/css" href="vendors/bower_components/alpaca/dist/alpaca/bootstrap/alpaca.min.css" rel="stylesheet"/>
+    
+    <!--STYLE 4 material wizard-->
+    <link href="css/material-bootstrap-wizard.css" rel="stylesheet"/>
+    <link href="css/style4.css" rel="stylesheet">
+
+    <link rel="icon" href="favicon.ico"/>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-640993-46', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "HBooker",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "ANY",
+      "description": "Gestion de vos demandes de rendez-vous via Internet"
+    }
+    </script>
+</head>
+<body>
+<!-- iframe à 770 x 880 -->
+<div id="contenu">
+    <div id="wizard" class="wizard-card" data-color="blue">
+        <div id="header">
+            <button type="button" style="display: none;" class="btn btn-default btn-lg" id="retour">
+                <img src="img/icon-home.png" alt="revenir en arrière"/>
+            </button>
+            <div id="headerText">
+                <span class="span-bold">Prise de rendez-vous</span>
+            </div>
+        </div>
+
+        <div class="wizard-header" style="display: none;">
+            <h1 class="wizard-title h3">
+            </h1>
+            <h5>Veuillez renseigner les informations ci-dessous</h5>
+        </div>
+
+        <div class="text-top text-center">
+            <h1>Je prends ou j'annule un rendez-vous</h1>
+            <p class="sousTitre" id="legalEntity"></p>
+
+            <div id="CGUNotChecked" class="center-block" style="display:none;">
+                Vous devez valider les <a id="voirCGU1">mentions légales</a> avant de continuer
+            </div>
+            <div class="checkbox checkbox-material" data-color="blue">
+                <label class="text-checkbox">
+                    <input type="checkbox" id="cbox1" value="premiere_checkbox">Je reconnais avoir pris connaissance
+                    des <a id="voirCGU2">mentions légales</a>.
+                </label>
+            </div>
+            <div class="faux-bouton" style="border:none;">Vous Souhaitez...</div>
+        </div>
+        <div class="text-center">
+            <div id="btn1" class="row">
+                <div class="col-sm-4 col-sm-offset-2 choice">
+                    <a class="icon flex-centring-child" href="#" id="prise" style="/*display:none*/">
+                        <img src="img/icon-booker1.png" alt="prendre rdv"/>
+
+                    </a> <h6>Prendre un rendez-vous</h6>
+                </div>
+                <div class="col-sm-4 choice">
+                    <a class="icon flex-centring-child" href="#" id="annul" style="/*display:none*/">
+                        <img src="img/icon-booker2.png" alt="annuler un rdv"/>
+
+                    </a><h6>Annuler un rendez-vous</h6>
+                </div>
+            </div>
+            <br/>
+            <button type="button" class="btn btn-default btn-lg center-block" style="display: none;" id="contact">
+                Contact
+            </button>
+        </div>
+        <div id="priseRDV"></div>
+        <div id="annulRDV"></div>
+        <div id="contactdiv"></div>
+        <div id="captchaContainer" style="display:none;">
+            <div id="captcha"></div>
+            <br>
+            <div id="noCaptcha" style="display:none;">Vous devez répondre au test "je ne suis pas un robot"</div>
+        </div>
+        <div id="errorDiv" style="display:none;">Veuillez remplir toutes les informations</div>
+        <div id="accompagnantDiv" style="display:none;">Coordonnées de l'accompagnant</div>
+        <div class="footer">
+            <p>Conformément à la loi Informatique et Libertés, vous disposez d'un droit d'accès et de rectification aux
+               informations vous concernant.</p>
+        </div>
+
+        <div id="confirmation" class="center-block flex-column-child " style="display:none;">
+            <strong>Votre demande a bien été prise en compte</strong>
+            <br/> Un email de confirmation va vous être envoyé.
+            <br/> Le secrétariat du service vous recontactera dans les meilleurs délais.
+            <br/><br/>
+            <button type="button" class="btn btn-default btn-lg" id="retourFinal"> Nouvelle demande</button>
+        </div>
+
+        <div id="CGU" class="flex-centring-child" style="display:none;">
+            <p>Les informations recueillies sur notre site font l'objet d'un traitement informatique destiné à
+               faciliter votre prise de rendez-vous. Les destinataires des données sont les équipes médicales
+               concernées du Centre Hospitalier. Conformément à la loi « informatique et libertés » du 6 janvier 1978
+               modifiée en 2004, vous bénéficiez d'un droit d'accès et de rectification aux informations qui vous
+               concernent, que vous pouvez exercer en vous adressant au correspondant informatique et liberté du Centre
+               Hospitalier. Vous pouvez également, pour des motifs légitimes, vous opposer au traitement des données
+               vous concernant.
+               <br/><br/>
+               <a href="index-v2.0.html"><strong>Retour à l'accueil...</strong></a>
+            </p>
+        </div>
+    </div>
+    <a class="center-block lien-ackwa" href="http://ackwa.fr" title="Copyright Ackwa" target="_blank">
+        <small>
+            HBooker by
+                <span class="ackwa-rond">
+                    <span class="sr-only">Ackwa.fr</span>
+                </span>
+            Ackwa
+        </small>
+    </a>
+</div>
+
+<!-- Dependencies JQuery, Bootstrap & handlebars -->
+<script type="text/javascript" src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="vendors/bower_components/handlebars/handlebars.min.js"></script>
+
+<!-- Other dependencies -->
+<script type="text/javascript" src="vendors/bower_components/jquery-maskedinput/dist/jquery.maskedinput.min.js"></script>
+
+<!-- Dates & times -->
+<script type="text/javascript" src="vendors/bower_components/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="vendors/bower_components/moment/locale/fr.js"></script>
+<script type="text/javascript" src="vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+<!---Style 4 Material-->
+<script type="text/javascript" src="js/jquery.bootstrap.js"></script>
+<script type="text/javascript" src="js/nouislider.min.js"></script>
+<script type="text/javascript" src="js/material.min.js"></script>
+<script type="text/javascript" src="js/material-kit.js"></script>
+
+<!-- Exceptions -->
+<script type="text/javascript" src="https://cdn.ravenjs.com/3.5.1/raven.min.js"></script>
+
+<!-- Custom Apalca -->
+<script type="text/javascript" src="vendors/overrides/alpaca/alpaca.js"></script>
+
+<!-- HBooker -->
+<script type="text/javascript" src="js/ackwa/config.js"></script>
+<script type="text/javascript" src="js/ackwa/tools.js"></script>
+<script type="text/javascript" src="js/api.js"></script>
+<script type="text/javascript" src="js/ackwa.js"></script>
+<script type="text/javascript" src="js/annul_ackwa.js"></script>
+<script type="text/javascript" src="js/priseRDV.js"></script>
+<script type="text/javascript" src="js/annulRDV.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+
+</body>
+</html>

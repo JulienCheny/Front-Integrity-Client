@@ -1,0 +1,169 @@
+{
+    "description": "Formulaire de demande de prise de RDV",
+    "type": "object",
+    "properties":{
+        "service":{
+            "title": "Service ",
+            "type": "string",
+            "enum": [],
+            "required": true
+        },
+        "specialite":{
+            "title": "Spécialité ",
+            "type": "string",
+            "enum": []
+        },
+        "medecin":{
+            "title": "Médecin ",
+            "type": "string",
+            "enum":[]
+        },
+        "choixinfo":{
+            "title": "Informations Complémentaires ",
+            "type": "string",
+            "enum": []
+        },
+        "recapMil":{
+            "title": "Recapitulatif ",
+            "type": "string",
+            "readonly":true
+        },
+        "commentaire":{
+            "title": "Informations importantes ",
+            "type": "string",
+            "readonly":true
+        },
+        "nom":{
+            "title": "Nom ",
+            "description": "Entrez votre nom",
+            "type": "string",
+            "minLength" : 2,
+            "required": true
+        },
+        "prenom":{
+            "title": "Prénom ",
+            "description": "Entrez votre prénom",
+            "type": "string",
+            "minLength" : 2,
+            "required": true
+        },
+        "datenaiss":{
+            "title": "Date de Naissance ",
+            "required": true
+        },
+
+        "accompagnant":{
+            "title": "Je suis la personne à contacter ",
+            "type": "radio",
+            "enum": ["oui","non"],
+            "required": true
+        },
+        "numTel":{
+            "title": "Téléphone ",
+            "type": "string",
+            "format":"phone"
+        },
+        "mail":{
+            "title": "E-Mail ",
+            "type": "string",
+            "format": "email"
+        },
+        "mailConf":{
+            "title": "Confirmation E-mail ",
+            "type": "string",
+            "format": "email"
+        },
+
+        "nomAcc":{
+            "title": "Nom de l'accompagnant",
+            "description": "Entrez votre nom.",
+            "minLength" : 2,
+            "type": "string",
+            "required": true
+        },
+        "prenomAcc":{
+            "title": "Prénom ",
+            "description": "Entrez votre prénom.",
+            "minLength" : 2,
+            "type": "string",
+            "required": true
+        },
+        "parenteAcc":{
+            "title": "Lien de parenté ",
+            "type": "string",
+            "enum": [1,2,3],
+            "required": true
+        },
+
+        "numTelAcc":{
+            "title": "Téléphone ",
+            "type": "string",
+            "required": true
+        },
+        "mailAcc":{
+            "title": "E-Mail ",
+            "type": "string",
+            "format": "email",
+            "required": true
+        },
+        "mailConfAcc":{
+            "title": "Confirmation E-mail ",
+            "type": "string",
+            "format": "email"
+        },
+
+        "recapNomPrenom": {
+            "title": "Identité",
+            "type": "string",
+            "readonly":true
+        },
+        "recapService":{
+            "title": "Vous souhaitez un rendez-vous en ",
+            "type": "string",
+            "readonly":true
+        },
+        "recapMedecin":{
+            "title": "Avec ",
+            "type": "string",
+            "readonly":true
+        },
+        "recapInfos":{
+            "title": "Motif ",
+            "type": "string",
+            "readonly":true
+        },
+
+        "recapComplement":{
+            "title": "Compléments d'information ",
+            "type": "string",
+            "readonly":true
+        },
+
+        "recapAccompagnant":{
+            "title": "Votre accompagnant est ",
+            "type": "string",
+            "readonly":true
+        },
+
+        "recapTel":{
+            "title": "Téléphone ",
+            "type": "string",
+            "readonly":true
+        },
+
+        "recapEmail":{
+            "title": "Email ",
+            "type": "string",
+            "readonly":true
+        }
+
+    },
+    "dependencies": {
+        "numTel":   ["accompagnant"],
+        "mail":     ["accompagnant"],
+        "mailConf": ["accompagnant"],
+
+        "recapAccompagnant" : ["accompagnant"]
+    }
+
+}

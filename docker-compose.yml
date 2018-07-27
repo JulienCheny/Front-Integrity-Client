@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  client:
+    build:
+      context: .
+    volumes:
+      - ./IntegrityChecker:/srv/IntegrityChecker:rw

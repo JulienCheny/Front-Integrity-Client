@@ -1,0 +1,40 @@
+{
+    "description": "Formulaire de demande de prise de RDV",
+    "type": "object",
+    "properties":{
+         "nom":{
+            "title": "Nom ",
+            "description": "Entrez votre nom",
+            "type": "string",
+             "minLength" : 2,
+             "required": true
+        },
+        "prenom":{
+            "title": "Prénom ",
+            "description": "Entrez votre prénom",
+            "type": "string",
+            "minLength" : 2,
+            "required": true
+        },
+
+        "mail":{
+            "title": "E-Mail ",
+            "type": "string",
+            "format": "email",
+            "required": true
+        },
+        "mailConf":{
+            "title": "Confirmation E-Mail ",
+            "type": "string",
+            "format": "email",
+            "required": true
+        },
+        "demande" : {
+            "title": "Votre demande ",
+            "type": "string",
+            "minLength" : 20,
+            "required": true
+        }
+
+    }
+}

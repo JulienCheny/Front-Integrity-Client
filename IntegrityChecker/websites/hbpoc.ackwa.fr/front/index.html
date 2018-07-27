@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>HBooker by Ackwa</title>
+    <meta name="author" content="Ackwa">
+    <meta name="description" content="HBooker CH de Vichy by Ackwa">
+    <!-- Bootstrap Stylesheet -->
+    <link type="text/css" href="vendors/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" href="vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <!-- Alpaca Stylesheet for Bootstrap -->
+    <link type="text/css" href="vendors/bower_components/alpaca/dist/alpaca/bootstrap/alpaca.min.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="css/style3.css" rel="stylesheet">
+
+    <link rel="icon" href="favicon.ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-640993-46', 'auto');
+      ga('send', 'pageview');
+    </script>
+</head>
+
+<body>
+<div id="contenu">
+    <div id="header">
+        <button type="button" style="display: none;" class="btn btn-default btn-lg" id="retour"> <i class="fa fa-undo" aria-hidden="true"></i> </button>
+        <div id="headerText"><span class='span-bold'>Prise de rendez-vous</span></div>
+    </div>
+    <div class="text-top">
+        <h1>Je prends ou j'annule un rendez-vous</h1>
+        <p class="sousTitre" id="legalEntity"></p>
+    </div>
+    <div id="wizard">
+        <div id="btn1">
+            <button type="button" class="btn btn-default btn-lg" id="prise" style="/*display:none*/"> Je prends <br>un rendez-vous </button>
+            <button type="button" class="btn btn-default btn-lg" id="annul" style="/*display:none*/"> J'annule <br>un rendez-vous </button>
+            <br/>
+            <button type="button" class="btn btn-default btn-lg center-block" style="display: none;" id="contact"> Contact </button>
+        </div>
+        <div id="priseRDV"></div>
+        <div id="annulRDV"></div>
+        <div id="contactdiv"></div>
+        <div id="captchaContainer">
+            <div id="captcha"></div>
+            <br>
+            <div id="noCaptcha" style="display:none;">Vous devez répondre au test "je ne suis pas un robot"</div>
+        </div>
+        <div id="errorDiv" style="display:none;">Veuillez remplir toutes les informations</div>
+        <div id="accompagnantDiv" style="display:none;">Coordonnées de l'accompagnant</div>
+    </div>
+    <div class="footer">
+        <div id="CGUNotChecked" class="center-block" style="display:none;">
+            Vous devez valider les <a id="voirCGU1">mentions légales</a> avant de continuer
+        </div>
+        <label class="text-checkbox"><input type="checkbox" id="cbox1" value="premiere_checkbox"> Je reconnais avoir pris connaissance des <a id="voirCGU2">mentions légales</a>.</label>
+        <p>Conformément à la loi Informatique et Libertés, vous disposez d'un droit d'accès et de rectification aux informations vous concernant.</p>
+    </div>
+
+    <div id="confirmation" class="center-block" style="display:none;">
+        <strong>Votre demande a bien été prise en compte</strong>
+        <br> Un email de confirmation va vous être envoyé.
+        <br> Le secrétariat du service vous recontactera dans les meilleurs délais.
+        <br><br>
+        <button type="button" class="btn btn-default btn-lg" id="retourFinal"> Nouvelle demande </button>
+    </div>
+
+    <div id="CGU" class="center-block" style="display:none;">
+    Les informations recueillies sur notre site font l'objet d'un traitement informatique destiné à faciliter votre prise de rendez-vous. Les destinataires des données sont les équipes médicales concernées du Centre Hospitalier. Conformément à la loi « informatique et libertés » du 6 janvier 1978 modifiée en 2004, vous bénéficiez d'un droit d'accès et de rectification aux informations qui vous concernent, que vous pouvez exercer en vous adressant au correspondant informatique et liberté du Centre Hospitalier. Vous pouvez également, pour des motifs légitimes, vous opposer au traitement des données vous concernant.
+    </div>
+
+    <div id="specialUnitHTML" class="center-block"></div>
+
+</div>
+<a class="center-block lien-ackwa" href="http://www.ackwa.fr/activites/produits-application-web/hbooker-vos-demandes-de-rendez-vous-par-internet.html" title="Copyright Ackwa" target="_blank">
+    <small>
+        HBooker by
+                <span class="ackwa-rond">
+                <span class="sr-only">Ackwa.fr</span>
+                </span>
+        Ackwa
+    </small>
+</a>
+<!-- Dependencies JQuery, Bootstrap & handlebars -->
+<script type="text/javascript" src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="vendors/bower_components/handlebars/handlebars.min.js"></script>
+<!-- Other dependencies -->
+<script type="text/javascript" src="vendors/bower_components/jquery-maskedinput/dist/jquery.maskedinput.min.js"></script>
+<!-- Dates & times -->
+<script type="text/javascript" src="vendors/bower_components/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="vendors/bower_components/moment/locale/fr.js"></script>
+<script type="text/javascript" src="vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<!-- Exceptions -->
+<script type="text/javascript" src="https://cdn.ravenjs.com/3.5.1/raven.min.js"></script>
+<!-- Custom Apalca -->
+<!-- <script type="text/javascript" src="vendors/bower_components/alpaca/dist/alpaca/web/alpaca.min.js"></script> -->
+<script type="text/javascript" src="vendors/overrides/alpaca/alpaca.js"></script>
+<!-- HBooker -->
+<script type="text/javascript" src="js/ackwa/config.js"></script>
+<script type="text/javascript" src="js/ackwa/tools.js"></script>
+<script type="text/javascript" src="js/api.js"></script>
+<script type="text/javascript" src="js/ackwa.js"></script>
+<script type="text/javascript" src="js/annul_ackwa.js"></script>
+<script type="text/javascript" src="js/priseRDV.js"></script>
+<script type="text/javascript" src="js/annulRDV.js"></script>
+<!--<script type="text/javascript" src="js/contact.js"></script> -->
+<!--<script type="text/javascript" src="js/contact_ackwa.js"></script>-->
+<script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<!-- Captcha Google -->
+<!--<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallbackCaptcha&render=explicit&hl=fr" async defer></script>-->
+</body>
+
+</html>

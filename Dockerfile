@@ -1,0 +1,3 @@
+ARG PHP_VERSION=7.2
+
+FROM php:${PHP_VERSION}-fpm-alpine
